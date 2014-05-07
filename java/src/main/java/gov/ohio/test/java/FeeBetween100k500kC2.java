@@ -2,13 +2,13 @@ package gov.ohio.test.java;
 
 import java.math.BigDecimal;
 
-public class FeeUnder100kC1 extends Fee {
+public class FeeBetween100k500kC2 extends Fee {
 
-	public FeeUnder100kC1() {
-		super(new BigDecimal(1), new BigDecimal(100000), 0.20, BigDecimal.ZERO);
+	public FeeBetween100k500kC2() {
+		super(new BigDecimal(100000), new BigDecimal(500000), 0.10, BigDecimal.ZERO);
 	}
-
-	public FeeUnder100kC1(BigDecimal lowLimit, BigDecimal topLimit, double feePercentage) {
+	
+	public FeeBetween100k500kC2(BigDecimal lowLimit, BigDecimal topLimit, double feePercentage) {
 		super(lowLimit, topLimit, feePercentage, BigDecimal.ZERO);
 	}
 
@@ -21,8 +21,8 @@ public class FeeUnder100kC1 extends Fee {
 		if ((this.amount.intValue() > 0 && this.topLimit.compareTo(this.lowLimit) == 1)) {
 
 			if (this.amount.compareTo(this.topLimit) == 1) {
-				res = this.topLimit;
-				res = res.multiply(multiplicand);				
+				res = this.topLimit.subtract(this.lowLimit);
+				res = res.multiply(multiplicand);
 			} else if ((this.amount.compareTo(this.topLimit) == -1 || this.amount.compareTo(this.topLimit) == 0) && this.amount.compareTo(this.lowLimit) == 1) {
 				res = this.amount.multiply(multiplicand);
 			}
